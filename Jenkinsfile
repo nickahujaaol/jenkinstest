@@ -22,5 +22,17 @@ pipeline {
         sh 'mvn install'
       }
     }
+    
+    stage ('Start Server') {
+      steps {
+        sh 'mvn spring-boot:start'
+      }
+    }
   }
+  
+  post { 
+        always { 
+            sh 'mvn spring-boot:stop'
+        }
+    }
 }
