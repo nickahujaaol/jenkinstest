@@ -26,6 +26,7 @@ pipeline {
     stage ('Start Server') {
       steps {
         sh 'mvn spring-boot:start'
+        echo '################# SERVER STARTED #######################'
       }
     }
   }
@@ -33,6 +34,7 @@ pipeline {
   post { 
         always { 
             sh 'mvn spring-boot:stop'
+          echo '################# SERVER STOPPED #######################'
         }
     }
 }
