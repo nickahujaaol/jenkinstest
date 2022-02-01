@@ -43,10 +43,13 @@ pipeline {
                 echo 'Working Dir:'
                 sh 'pwd'
             }
-            dir('integration_testing') {
-                echo 'Working Dir Now:'
-                sh 'pwd'
-                sh 'npm install'
+
+            steps {
+                dir('integration_testing') {
+                    echo 'Working Dir Now:'
+                    sh 'pwd'
+                    sh 'npm install'
+                }
             }
         }
 
