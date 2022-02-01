@@ -63,8 +63,11 @@ pipeline {
             sh 'mvn spring-boot:stop'
             echo '################# SERVER STOPPED #######################'
             sh 'npm run cy:report'
+            echo '################# REPORT RAN #######################'
             archiveArtifacts artifacts: "automation-results/", allowEmptyArchive: true
+            echo '################# ARCHIVING DONE #######################'
             publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'automation-results', reportFiles: 'martech_automation_report.html', reportName: 'Test Overview', reportTitles: ''])
+            echo '################# REPORTS PUBLISHED #######################'
         }
     }
 }
