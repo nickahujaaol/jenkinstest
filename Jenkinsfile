@@ -52,6 +52,7 @@ pipeline {
                     echo '##################### Starting Cypress ###########################'
                     sh 'npx cypress run'
                     echo '##################### Cypress Complete ###########################'
+                    sh 'ls'
                 }
             }
         }
