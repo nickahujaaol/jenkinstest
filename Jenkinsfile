@@ -50,7 +50,7 @@ pipeline {
                     sh 'npm install'
 
                     echo '##################### Starting Cypress ###########################'
-                    sh 'npx cypress run'
+                    sh 'npm run cy:run'
                     echo '##################### Cypress Complete ###########################'
                     sh 'ls'
                 }
@@ -62,6 +62,9 @@ pipeline {
         always {
             sh 'mvn spring-boot:stop'
             echo '################# SERVER STOPPED #######################'
+            sh 'npm run cy:report'
+            archiveArtifacts artifacts: "collections/martech-tests/automation-results/", allowEmptyArchive: true
+            publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'collections/martech-tests/automation-results', reportFiles: 'martech_automation_report.html', reportName: 'Test Overview', reportTitles: ''])
         }
     }
 }
