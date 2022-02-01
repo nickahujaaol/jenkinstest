@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-        stage('Prepare E2E Testing') {
+        stage('Run E2E Testing') {
             steps {
                 checkout([$class: 'GitSCM', branches: [
                     [name: '*/main']
@@ -42,22 +42,16 @@ pipeline {
 
                 echo 'Working Dir:'
                 sh 'pwd'
-            }
 
-            steps {
                 dir('integration_testing') {
                     echo 'Working Dir Now:'
                     sh 'pwd'
                     sh 'npm install'
-                }
-            }
-        }
 
-        stage('Run E2E Integration Testing') {
-            steps {
-                echo '##################### Starting Cypress ###########################'
-                sh 'npx cypress run'
-                echo '##################### Cypress Complete ###########################'
+                    echo '##################### Starting Cypress ###########################'
+                    sh 'npx cypress run'
+                    echo '##################### Cypress Complete ###########################'
+                }
             }
         }
     }
