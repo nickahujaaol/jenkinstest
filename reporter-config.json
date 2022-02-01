@@ -1,0 +1,12 @@
+{
+  "reporterEnabled": "mochawesome",
+  "mochawesomeReporterOptions": {
+      "reportDir": "automation-results/reports",
+      "code": false,
+      "reportFilename": "index",
+      "overwrite": false,
+      "html": false,
+      "json": true,
+      "charts": true
+  }
+}

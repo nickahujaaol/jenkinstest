@@ -1,0 +1,10 @@
+{
+  "nodeVersion": "system",
+  "numTestsKeptInMemory": 1,
+  "chromeWebSecurity": false,
+  "video": false,
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "configFile": "reporter-config.json"
+  }
+}
