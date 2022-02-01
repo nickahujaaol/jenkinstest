@@ -25,7 +25,7 @@ pipeline {
     
     stage ('Start Server') {
       steps {
-        sh 'mvn spring-boot:start'
+        sh 'mvn spring-boot:start -Dserver.port=8080'
         echo '################# SERVER STARTED #######################'
       }
     }
