@@ -62,6 +62,7 @@ pipeline {
         always {
             sh 'mvn spring-boot:stop'
             echo '################# SERVER STOPPED #######################'
+            sh 'pwd'
             sh 'npm run cy:report'
             echo '################# REPORT RAN #######################'
             archiveArtifacts artifacts: "automation-results/", allowEmptyArchive: true
