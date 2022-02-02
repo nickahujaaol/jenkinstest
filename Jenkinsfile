@@ -36,7 +36,7 @@ pipeline {
 
                 dir('integration_testing') {
                     sh 'npm install'
-                    sh 'rm -r automation-results && npm run cy:run'
+                    sh 'rm -rf automation-results && npm run cy:run'
                 }
             }
         }
