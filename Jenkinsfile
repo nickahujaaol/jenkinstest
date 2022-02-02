@@ -36,7 +36,7 @@ pipeline {
 
                 dir('integration_testing') {
                     sh 'npm install'
-                    sh 'npm run cy:run'
+                    sh 'rm -r automation-results && npm run cy:run'
                 }
             }
         }
@@ -52,7 +52,6 @@ pipeline {
         always {
             sh 'mvn spring-boot:stop'
             dir('integration_testing') {
-                sh 'rm -r automation-results'
                 sh 'npm run cy:report'
                 archiveArtifacts artifacts: "automation-results/", allowEmptyArchive: true
                 publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'automation-results', reportFiles: 'martech_automation_report.html', reportName: 'Test Overview', reportTitles: ''])
