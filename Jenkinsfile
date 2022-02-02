@@ -18,16 +18,9 @@ pipeline {
             }
         }
 
-        stage('Install') {
-            steps {
-                sh 'mvn install'
-            }
-        }
-
         stage('Start Server') {
             steps {
                 sh 'mvn spring-boot:start -Dspring-boot.run.arguments=--server.port=8090'
-                echo '################# SERVER STARTED #######################'
             }
         }
 
@@ -41,35 +34,27 @@ pipeline {
                     [url: 'https://github.com/nickahujaaol/JenkinsCypress.git']
                 ]])
 
-                echo 'Working Dir:'
-                sh 'pwd'
-
                 dir('integration_testing') {
-                    echo 'Working Dir Now:'
-                    sh 'pwd'
                     sh 'npm install'
-
-                    echo '##################### Starting Cypress ###########################'
                     sh 'npm run cy:run'
-                    echo '##################### Cypress Complete ###########################'
-                    sh 'ls'
                 }
             }
+        }
+    }
+
+    stage('Install') {
+        steps {
+            sh 'mvn install'
         }
     }
 
     post {
         always {
             sh 'mvn spring-boot:stop'
-            echo '################# SERVER STOPPED #######################'
             dir('integration_testing') {
-                sh 'pwd'
                 sh 'npm run cy:report'
-                echo '################# REPORT RAN #######################'
                 archiveArtifacts artifacts: "automation-results/", allowEmptyArchive: true
-                echo '################# ARCHIVING DONE #######################'
                 publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'automation-results', reportFiles: 'martech_automation_report.html', reportName: 'Test Overview', reportTitles: ''])
-                echo '################# REPORTS PUBLISHED #######################'
             }
         }
     }
