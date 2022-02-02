@@ -40,11 +40,11 @@ pipeline {
                 }
             }
         }
-    }
 
-    stage('Install') {
-        steps {
-            sh 'mvn install'
+        stage('Install') {
+            steps {
+                sh 'mvn install'
+            }
         }
     }
 
